@@ -66,7 +66,7 @@ public class WordleGame {
 
         if (guess.length() != secretWord.length()) {
             EventBus.getInstance().publish(
-                    "Your guess must have exactly " + secretWord.length() + " letters."
+                    "<html>Your guess must have exactly <br>" + secretWord.length() + " letters.</html>"
             );
             throw new IllegalArgumentException("Guess has wrong length.");
         }
@@ -77,14 +77,14 @@ public class WordleGame {
 
         if (guess.equals(secretWord)) {
             won = true;
-            EventBus.getInstance().publish("Congratulations! You guessed the word!");
+            EventBus.getInstance().publish("<html>Congratulations!<br>You guessed the word!</html>");
         } else if (attempts >= maxAttempts) {
-            EventBus.getInstance().publish("No more attempts. The word was: " + secretWord);
+            EventBus.getInstance().publish("<html>No more attempts.<br>The word was: " + secretWord + "</html>");
         } else {
             // This is where we "display things like that letter is not correct"
             // via the Observer pattern.
             EventBus.getInstance().publish(
-                    "That word is not correct. Attempt " + attempts + " of " + maxAttempts + "."
+                    "<html>That word is not correct.<br>Attempt " + attempts + " of " + maxAttempts + ".</html>"
             );
         }
 

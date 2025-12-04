@@ -28,6 +28,8 @@ public class WordleFrame extends JFrame implements GameEventListener {
 
     private int currentRow = 0;
 
+    private final int TILE_SIZE = 50;
+
     public WordleFrame(WordleGame game, ColorStrategy colorStrategy) {
         this.game = game;
         this.colorStrategy = colorStrategy;
@@ -36,7 +38,7 @@ public class WordleFrame extends JFrame implements GameEventListener {
         int cols = game.getWordLength();
         this.gridFields = new JTextField[rows][cols];
 
-        setTitle("Wordle in Java (Swing)");
+        setTitle("Wordle");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setResizable(false);
 
@@ -56,7 +58,7 @@ public class WordleFrame extends JFrame implements GameEventListener {
 
         mainPanel.add(inputPanel, BorderLayout.SOUTH);
 
-        messageLabel = new JLabel("Enter a " + cols + "-letter word and press Guess.");
+        messageLabel = new JLabel("<html>Enter a " + cols + "-letter word,<br>then press Guess.</html>");
         mainPanel.add(messageLabel, BorderLayout.NORTH);
 
         setContentPane(mainPanel);
@@ -82,7 +84,14 @@ public class WordleFrame extends JFrame implements GameEventListener {
                 JTextField cell = new JTextField();
                 cell.setHorizontalAlignment(JTextField.CENTER);
                 cell.setEditable(false);
+                cell.setFocusable(false);
                 cell.setFont(cell.getFont().deriveFont(Font.BOLD, 24f));
+
+                Dimension dimension = new Dimension(TILE_SIZE, TILE_SIZE);
+                cell.setPreferredSize(dimension);
+                cell.setMaximumSize(dimension);
+                cell.setMinimumSize(dimension);
+
                 gridFields[r][c] = cell;
                 panel.add(cell);
             }

@@ -3,28 +3,42 @@ package Wordle.Factory;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Random;
 
 /**
  * Simple concrete implementation of the WordListFactory.
  * In a real game, this could read from a file or database.
  */
 public class SimpleWordListFactory implements WordListFactory {
+    static private final Random rand = new Random();
 
     @Override
-    public List<String> createWordList(int wordLength) {
-        // Basic hard-coded word list for the example.
-        List<String> allWords = Arrays.asList(
+    public String chooseWord(int wordLength) {
+        List<String> fourLetterWords = Arrays.asList(
+                "RUBY", "BLUE", "NEON", "KING", "SOFT",
+                "RAIN", "BOSS", "SANG", "JAZZ", "WILD",
+                "BEEN", "THIS", "COLD", "HAND", "NAME"
+        );
+        List<String> fiveLetterWords = Arrays.asList(
                 "APPLE", "GRAPE", "HOUSE", "PLANT", "SMILE",
                 "BRAVE", "GHOST", "LIGHT", "MONEY", "MOUSE",
                 "TRAIN", "PLANE", "CHAIR", "TABLE", "WORLD"
         );
+        List<String> sixLetterWords = Arrays.asList(
+                "BETTER", "SUMMER", "SEEMED", "HONEST", "FALLING",
+                "FADING", "SHARED", "LOSING", "INSIDE", "FRIEND",
+                "TRYING"
+        );
 
-        List<String> result = new ArrayList<>();
-        for (String w : allWords) {
-            if (w.length() == wordLength) {
-                result.add(w);
-            }
+        switch (wordLength) {
+            case 4:
+                return fourLetterWords.get(rand.nextInt(fourLetterWords.size()));
+            case 5:
+                return fiveLetterWords.get(rand.nextInt(fiveLetterWords.size()));
+            case 6:
+                return sixLetterWords.get(rand.nextInt(sixLetterWords.size()));
+            default:
+                return fiveLetterWords.get(rand.nextInt(fiveLetterWords.size()));
         }
-        return result;
     }
 }

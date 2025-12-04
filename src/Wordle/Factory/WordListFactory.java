@@ -14,5 +14,5 @@ public interface WordListFactory {
      * @param wordLength the desired length of each word.
      * @return a list of uppercase words with the given length.
      */
-    List<String> createWordList(int wordLength);
+    String chooseWord(int wordLength);
 }

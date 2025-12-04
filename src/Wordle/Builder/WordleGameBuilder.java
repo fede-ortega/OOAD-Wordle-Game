@@ -33,12 +33,10 @@ public class WordleGameBuilder {
     }
 
     public WordleGame build() {
-        List<String> words = wordListFactory.createWordList(wordLength);
-        if (words.isEmpty()) {
+        String word = wordListFactory.chooseWord(wordLength);
+        if (word == null) {
             throw new IllegalStateException("Word list is empty for length " + wordLength);
         }
-        // Choose a random secret word
-        String secret = words.get(new Random().nextInt(words.size()));
-        return new WordleGame(secret, maxAttempts);
+        return new WordleGame(word, maxAttempts);
     }
 }

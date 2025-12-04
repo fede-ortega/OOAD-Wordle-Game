@@ -10,7 +10,7 @@ public class SettingsFrame extends JFrame {
     private final String theme;
 
     public SettingsFrame() {
-        String[] lengths = {"5"};
+        String[] lengths = {"4", "5", "6"};
         String[] attempts = {"1", "2", "3", "4", "5", "6", "7", "8", "9"};
         String[] themes = {"Default", "Festive"};
 
