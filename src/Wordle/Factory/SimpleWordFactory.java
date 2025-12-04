@@ -1,6 +1,5 @@
 package Wordle.Factory;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
@@ -9,7 +8,7 @@ import java.util.Random;
  * Simple concrete implementation of the WordListFactory.
  * In a real game, this could read from a file or database.
  */
-public class SimpleWordListFactory implements WordListFactory {
+public class SimpleWordFactory implements WordFactory {
     static private final Random rand = new Random();
 
     @Override
@@ -30,15 +29,11 @@ public class SimpleWordListFactory implements WordListFactory {
                 "TRYING"
         );
 
-        switch (wordLength) {
-            case 4:
-                return fourLetterWords.get(rand.nextInt(fourLetterWords.size()));
-            case 5:
-                return fiveLetterWords.get(rand.nextInt(fiveLetterWords.size()));
-            case 6:
-                return sixLetterWords.get(rand.nextInt(sixLetterWords.size()));
-            default:
-                return fiveLetterWords.get(rand.nextInt(fiveLetterWords.size()));
-        }
+        return switch (wordLength) {
+            case 4 -> fourLetterWords.get(rand.nextInt(fourLetterWords.size()));
+            case 5 -> fiveLetterWords.get(rand.nextInt(fiveLetterWords.size()));
+            case 6 -> sixLetterWords.get(rand.nextInt(sixLetterWords.size()));
+            default -> fiveLetterWords.get(rand.nextInt(fiveLetterWords.size()));
+        };
     }
 }
