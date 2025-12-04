@@ -1,12 +1,10 @@
 package Wordle.Factory;
 
-import java.util.List;
-
 /**
  * Wordle.Factory pattern: this interface defines how to create
  * a list of candidate words for the game.
  */
-public interface WordListFactory {
+public interface WordFactory {
 
     /**
      * Creates and returns a list of candidate words.

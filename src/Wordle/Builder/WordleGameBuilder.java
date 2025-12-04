@@ -1,11 +1,8 @@
 package Wordle.Builder;
 
-import Wordle.Factory.SimpleWordListFactory;
-import Wordle.Factory.WordListFactory;
+import Wordle.Factory.SimpleWordFactory;
+import Wordle.Factory.WordFactory;
 import Wordle.Model.WordleGame;
-
-import java.util.List;
-import java.util.Random;
 
 /**
  * Wordle.Builder pattern: responsible for constructing a configured WordleGame.
@@ -15,7 +12,7 @@ public class WordleGameBuilder {
 
     private int wordLength;
     private int maxAttempts;
-    private WordListFactory wordListFactory = new SimpleWordListFactory();
+    private WordFactory wordFactory = new SimpleWordFactory();
 
     public WordleGameBuilder withWordLength(int wordLength) {
         this.wordLength = wordLength;
@@ -27,13 +24,13 @@ public class WordleGameBuilder {
         return this;
     }
 
-    public WordleGameBuilder withWordListFactory(WordListFactory factory) {
-        this.wordListFactory = factory;
+    public WordleGameBuilder withWordFactory(WordFactory factory) {
+        this.wordFactory = factory;
         return this;
     }
 
     public WordleGame build() {
-        String word = wordListFactory.chooseWord(wordLength);
+        String word = wordFactory.chooseWord(wordLength);
         if (word == null) {
             throw new IllegalStateException("Word list is empty for length " + wordLength);
         }

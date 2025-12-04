@@ -11,7 +11,7 @@ public class SettingsFrame extends JFrame {
 
     public SettingsFrame() {
         String[] lengths = {"4", "5", "6"};
-        String[] attempts = {"1", "2", "3", "4", "5", "6", "7", "8", "9"};
+        String[] attempts = {"2", "3", "4", "5", "6", "7", "8", "9"};
         String[] themes = {"Default", "Festive", "Halloween"};
 
         JComboBox<String> lengthBox = new JComboBox<>(lengths);

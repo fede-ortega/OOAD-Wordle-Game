@@ -2,7 +2,7 @@ package Wordle;
 
 import Wordle.Builder.WordleGameBuilder;
 import Wordle.Factory.ColorFactory;
-import Wordle.Factory.SimpleWordListFactory;
+import Wordle.Factory.SimpleWordFactory;
 import Wordle.Model.WordleGame;
 import Wordle.Strategy.ColorStrategy;
 import Wordle.UI.SettingsFrame;
@@ -13,23 +13,39 @@ import javax.swing.*;
 public class Main {
     public static void main(String[] args) {
         // Start Swing on the Wordle.Event Dispatch Thread
-        SwingUtilities.invokeLater(() -> {
-            SettingsFrame start = new SettingsFrame();
+        SwingUtilities.invokeLater(Main::playGame);
+    }
 
-            // Wordle.Builder pattern: configure and build the game object
-            WordleGameBuilder builder = new WordleGameBuilder()
-                    .withAttempts(start.getMaxAttempts())
-                    .withWordLength(start.getWordLength())
-                    .withWordListFactory(new SimpleWordListFactory());
+    private static void playGame() {
+        SettingsFrame settings = new SettingsFrame();
 
-            WordleGame game = builder.build();
+        // Wordle.Builder pattern: configure and build the game object
+        WordleGameBuilder builder = new WordleGameBuilder()
+                .withAttempts(settings.getMaxAttempts())
+                .withWordLength(settings.getWordLength())
+                .withWordFactory(new SimpleWordFactory());
 
-            // Wordle.Strategy pattern: choose how to color the tiles
-            ColorStrategy colorStrategy = ColorFactory.createColorStrategy(start.getTheme());
+        WordleGame game = builder.build();
 
-            // Create and show the main window (also an Observer)
-            WordleFrame frame = new WordleFrame(game, colorStrategy);
-            frame.setVisible(true);
+        // Wordle.Strategy pattern: choose how to color the tiles
+        ColorStrategy colorStrategy = ColorFactory.createColorStrategy(settings.getTheme());
+
+        // Create and show the main window (also an Observer)
+        WordleFrame frame = new WordleFrame(game, colorStrategy);
+        frame.setVisible(true);
+
+
+
+        frame.setGameRestart(() -> {
+
+            WordleGameBuilder newBuilder = new WordleGameBuilder()
+                    .withAttempts(settings.getMaxAttempts())
+                    .withWordLength(settings.getWordLength())
+                    .withWordFactory(new SimpleWordFactory());
+
+            WordleGame newGame = newBuilder.build();
+
+            frame.resetGame(newGame, colorStrategy);
         });
     }
 }

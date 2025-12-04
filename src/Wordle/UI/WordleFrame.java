@@ -2,6 +2,7 @@ package Wordle.UI;
 
 import Wordle.Event.EventBus;
 import Wordle.Event.GameEventListener;
+import Wordle.Model.GameRestartListener;
 import Wordle.Model.LetterState;
 import Wordle.Model.WordleGame;
 import Wordle.Strategy.ColorStrategy;
@@ -18,13 +19,14 @@ import java.awt.event.ActionListener;
  */
 public class WordleFrame extends JFrame implements GameEventListener {
 
-    private final WordleGame game;
+    private WordleGame game;
     private final ColorStrategy colorStrategy;
 
     private final JTextField[][] gridFields;
     private final JTextField inputField;
     private final JButton guessButton;
     private final JLabel messageLabel;
+    private GameRestartListener listener;
 
     private int currentRow = 0;
 
@@ -109,7 +111,7 @@ public class WordleFrame extends JFrame implements GameEventListener {
 
     private void submitGuess() {
         if (game.isGameOver()) {
-            EventBus.getInstance().publish("The game has finished. Restart the program to play again.");
+            EventBus.getInstance().publish("<html>The game has finished.<br>Restart the program to play again.</html>");
             return;
         }
 
@@ -120,9 +122,9 @@ public class WordleFrame extends JFrame implements GameEventListener {
             inputField.setText("");
 
             if (game.isGameOver()) {
-                guessButton.setEnabled(false);
-                inputField.setEnabled(false);
+                gameOverHandler();
             }
+
         } catch (IllegalArgumentException ex) {
             // The game already sent a human-readable message through the EventBus.
             // We only log something to the console for debugging.
@@ -130,6 +132,23 @@ public class WordleFrame extends JFrame implements GameEventListener {
         } catch (IllegalStateException ex) {
             System.out.println("Game state error: " + ex.getMessage());
         }
+    }
+
+    private void gameOverHandler() {
+        inputField.setEnabled(false);
+
+        guessButton.setText("Play Again");
+        for(ActionListener actionListener : inputField.getActionListeners()) {
+            inputField.removeActionListener(actionListener);
+        }
+        for(ActionListener actionListener : guessButton.getActionListeners()) {
+            guessButton.removeActionListener(actionListener);
+        }
+        guessButton.addActionListener(_ -> {
+            if(listener != null) {
+                listener.onRestart();
+            }
+        });
     }
 
     private void updateGridRow(String guess, LetterState[] states) {
@@ -149,6 +168,36 @@ public class WordleFrame extends JFrame implements GameEventListener {
             }
         }
         currentRow++;
+    }
+
+    public void resetGame(WordleGame game, ColorStrategy colorStrategy) {
+        this.game = game;
+        int cols = game.getWordLength();
+        game.reset(game.getSecretWord());
+        currentRow = 0;
+
+        for (JTextField[] row : gridFields) {
+            for (JTextField cell : row) {
+                cell.setText("");
+                cell.setBackground(colorStrategy.getColorForState(LetterState.UNKNOWN));
+            }
+        }
+
+        guessButton.setText("Guess");
+        for(ActionListener actionListener : guessButton.getActionListeners()) {
+            guessButton.removeActionListener(actionListener);
+        }
+
+        GuessAction guessAction = new GuessAction();
+        guessButton.addActionListener(guessAction);
+        inputField.addActionListener(guessAction);
+        inputField.setEnabled(true);
+
+        messageLabel.setText("<html>Enter a " + cols + " letter word,<br>then press Guess.</html>");
+    }
+
+    public void setGameRestart(GameRestartListener listener) {
+        this.listener = listener;
     }
 
     @Override

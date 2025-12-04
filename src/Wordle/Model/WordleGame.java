@@ -11,7 +11,7 @@ import java.util.Map;
  */
 public class WordleGame {
 
-    private final String secretWord;
+    private String secretWord;
     private final int maxAttempts;
     private int attempts;
     private boolean won;
@@ -132,5 +132,11 @@ public class WordleGame {
         }
 
         return states;
+    }
+
+    public void reset(String secretWord) {
+        this.secretWord = secretWord.toUpperCase();
+        won = false;
+        attempts = 0;
     }
 }
