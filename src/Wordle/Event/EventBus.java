@@ -7,7 +7,6 @@ import java.util.List;
  * EventBus is both:
  * - a Singleton (only one instance in the whole app), and
  * - the "subject" for the Observer pattern.
- *
  * It stores a list of observers and broadcasts messages to all of them.
  */
 public class EventBus {

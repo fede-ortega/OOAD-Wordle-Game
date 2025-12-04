@@ -102,17 +102,17 @@ public class WordleGame {
         // Count how many times each letter appears in the secret word.
         Map<Character, Integer> counts = new HashMap<>();
         for (int i = 0; i < length; i++) {
-            char c = secretWord.charAt(i);
-            counts.put(c, counts.getOrDefault(c, 0) + 1);
+            char character = secretWord.charAt(i);
+            counts.put(character, counts.getOrDefault(character, 0) + 1);
         }
 
         // First pass: mark CORRECT positions and update counts.
         for (int i = 0; i < length; i++) {
-            char g = guess.charAt(i);
-            char s = secretWord.charAt(i);
-            if (g == s) {
+            char guessCharacter = guess.charAt(i);
+            char secretCharacter = secretWord.charAt(i);
+            if (guessCharacter == secretCharacter) {
                 states[i] = LetterState.CORRECT;
-                counts.put(g, counts.get(g) - 1);
+                counts.put(guessCharacter, counts.get(guessCharacter) - 1);
             }
         }
 
@@ -121,11 +121,11 @@ public class WordleGame {
             if (states[i] == LetterState.CORRECT) {
                 continue;
             }
-            char g = guess.charAt(i);
-            Integer count = counts.get(g);
+            char guessCharacter = guess.charAt(i);
+            Integer count = counts.get(guessCharacter);
             if (count != null && count > 0) {
                 states[i] = LetterState.PRESENT;
-                counts.put(g, count - 1);
+                counts.put(guessCharacter, count - 1);
             } else {
                 states[i] = LetterState.ABSENT;
             }

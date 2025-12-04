@@ -20,16 +20,11 @@ public class DefaultColorStrategy implements ColorStrategy {
             return Color.WHITE;
         }
 
-        switch (state) {
-            case ABSENT:
-                return Color.LIGHT_GRAY;
-            case PRESENT:
-                return Color.YELLOW;
-            case CORRECT:
-                return Color.GREEN;
-            case UNKNOWN:
-            default:
-                return Color.WHITE;
-        }
+        return switch (state) {
+            case ABSENT -> Color.LIGHT_GRAY;
+            case PRESENT -> Color.YELLOW;
+            case CORRECT -> Color.GREEN;
+            default -> Color.WHITE;
+        };
     }
 }
