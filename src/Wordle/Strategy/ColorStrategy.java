@@ -10,10 +10,21 @@ import java.awt.Color;
  * By changing the ColorStrategy, we can change how letters move
  * from white -> yellow -> green, etc.
  */
-public interface ColorStrategy {
+abstract public class ColorStrategy {
 
     /**
      * Returns the background color to use for a letter with the given state.
      */
-    Color getColorForState(LetterState state);
+    public Color getColorForState(LetterState state) {
+        if (state == null) {
+            return Color.WHITE;
+        }
+
+        return switch (state) {
+            case ABSENT -> Color.LIGHT_GRAY;
+            case PRESENT -> Color.YELLOW;
+            case CORRECT -> Color.GREEN;
+            default -> Color.WHITE;
+        };
+    }
 }

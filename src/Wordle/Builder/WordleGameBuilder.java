@@ -13,8 +13,8 @@ import java.util.Random;
  */
 public class WordleGameBuilder {
 
-    private int wordLength = 5;
-    private int maxAttempts = 6;
+    private int wordLength;
+    private int maxAttempts;
     private WordListFactory wordListFactory = new SimpleWordListFactory();
 
     public WordleGameBuilder withWordLength(int wordLength) {
