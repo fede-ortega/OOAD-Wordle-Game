@@ -27,7 +27,7 @@ public class FestiveColorStrategyTest {
 
         Color color = strategy.getColorForState(LetterState.ABSENT);
 
-        assertEquals(Color.RED, color, "ABSENT should map to RED in festive strategy");
+        assertEquals(new Color(220, 61, 42), color, "ABSENT should map to RED in festive strategy");
     }
 
     @Test
@@ -36,7 +36,7 @@ public class FestiveColorStrategyTest {
 
         Color color = strategy.getColorForState(LetterState.PRESENT);
 
-        assertEquals(Color.ORANGE, color, "PRESENT should map to ORANGE in festive strategy");
+        assertEquals(new Color(193, 165, 90), color, "PRESENT should map to ORANGE in festive strategy");
     }
 
     @Test
@@ -45,7 +45,7 @@ public class FestiveColorStrategyTest {
 
         Color color = strategy.getColorForState(LetterState.CORRECT);
 
-        assertEquals(Color.GREEN, color, "CORRECT should map to GREEN in festive strategy");
+        assertEquals(new Color(13, 89, 1), color, "CORRECT should map to GREEN in festive strategy");
     }
 
     @Test

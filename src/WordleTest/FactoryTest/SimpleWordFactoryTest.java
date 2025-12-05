@@ -25,9 +25,9 @@ class SimpleWordFactoryTest {
     );
 
     private static final List<String> sixLetterWords = List.of(
-            "BETTER", "SUMMER", "SEEMED", "HONEST", "FALLING",
-            "FADING", "SHARED", "LOSING", "INSIDE", "FRIEND",
-            "TRYING"
+            "BETTER", "SUMMER", "POCKET", "HONEST", "WINDOW",
+            "ORCHID", "FINGER", "SCREAM", "INSIDE", "FRIEND",
+            "ENOUGH", "DAMAGE", "ANYONE", "PRETTY", "LONELY"
     );
 
     @Test
