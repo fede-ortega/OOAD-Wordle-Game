@@ -31,7 +31,6 @@ public class SimpleWordFactory implements WordFactory {
 
         return switch (wordLength) {
             case 4 -> fourLetterWords.get(rand.nextInt(fourLetterWords.size()));
-            case 5 -> fiveLetterWords.get(rand.nextInt(fiveLetterWords.size()));
             case 6 -> sixLetterWords.get(rand.nextInt(sixLetterWords.size()));
             default -> fiveLetterWords.get(rand.nextInt(fiveLetterWords.size()));
         };

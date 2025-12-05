@@ -13,7 +13,6 @@ public class ColorFactory {
 
         return switch(theme) {
             case "Festive" -> new FestiveColorStrategy();
-            case "Something" -> new DefaultColorStrategy();
             case "Halloween"  -> new HalloweenColorStrategy();
             default -> new DefaultColorStrategy();
         };
