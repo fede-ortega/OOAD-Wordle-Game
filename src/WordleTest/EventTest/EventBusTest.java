@@ -59,7 +59,7 @@ public class EventBusTest {
 
         assertEquals(1, listener.getReceived().size(),
                 "Listener should receive exactly one message");
-        assertEquals(msg, listener.getReceived().get(0),
+        assertEquals(msg, listener.getReceived().getFirst(),
                 "Listener should receive the published message");
     }
 
@@ -102,7 +102,7 @@ public class EventBusTest {
 
         // listener2 still registered, should receive the message
         assertEquals(1, listener2.getReceived().size());
-        assertEquals(msg, listener2.getReceived().get(0));
+        assertEquals(msg, listener2.getReceived().getFirst());
     }
 
     @Test
@@ -144,9 +144,9 @@ public class EventBusTest {
         bus.publish(msg);
 
         assertEquals(1, l1.getReceived().size());
-        assertEquals(msg, l1.getReceived().get(0));
+        assertEquals(msg, l1.getReceived().getFirst());
 
         assertEquals(1, l2.getReceived().size());
-        assertEquals(msg, l2.getReceived().get(0));
+        assertEquals(msg, l2.getReceived().getFirst());
     }
 }

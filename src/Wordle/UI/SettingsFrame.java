@@ -15,8 +15,11 @@ public class SettingsFrame extends JFrame {
         String[] themes = {"Default", "Festive", "Halloween"};
 
         JComboBox<String> lengthBox = new JComboBox<>(lengths);
+        lengthBox.setSelectedItem("5");
         JComboBox<String> attemptBox = new JComboBox<>(attempts);
+        attemptBox.setSelectedItem("5");
         JComboBox<String> themeBox = new JComboBox<>(themes);
+        themeBox.setSelectedItem("Default");
 
         JPanel panel = new JPanel();
         panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
@@ -29,7 +32,7 @@ public class SettingsFrame extends JFrame {
         panel.add(new JLabel("Theme:"));
         panel.add(themeBox);
 
-        int result = JOptionPane.showConfirmDialog(null, panel, "Settings", JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE);
+        int result = JOptionPane.showConfirmDialog(null, panel, "Wordle Settings", JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE);
 
         if (result != JOptionPane.OK_OPTION) {
             throw new IllegalStateException("Setup fail");

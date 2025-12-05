@@ -14,20 +14,14 @@ public class WordleGameTest {
 
     private static class CapturingListener implements GameEventListener {
         private String lastMessage;
-        private int callCount;
 
         @Override
         public void onGameEvent(String message) {
             this.lastMessage = message;
-            this.callCount++;
         }
 
         public String getLastMessage() {
             return lastMessage;
-        }
-
-        public int getCallCount() {
-            return callCount;
         }
     }
 

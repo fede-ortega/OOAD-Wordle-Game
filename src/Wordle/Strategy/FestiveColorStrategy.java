@@ -13,9 +13,9 @@ public class FestiveColorStrategy extends ColorStrategy {
         }
 
         return switch (state) {
-            case ABSENT -> Color.RED;
-            case PRESENT -> Color.ORANGE;
-            case CORRECT -> Color.GREEN;
+            case ABSENT -> new Color(220, 61, 42);
+            case PRESENT -> new Color(193, 165, 90);
+            case CORRECT -> new Color(13, 89, 1);
             default -> Color.WHITE;
         };
     }

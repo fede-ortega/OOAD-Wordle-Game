@@ -70,6 +70,12 @@ public class WordleGame {
             );
             throw new IllegalArgumentException("Guess has wrong length.");
         }
+        else if (!guess.matches("[a-zA-Z]+")) {
+            EventBus.getInstance().publish(
+                    "<html>Your guess must<br>only have letters.</html>"
+            );
+            throw new IllegalArgumentException("Guess was invalid.");
+        }
 
         attempts++;
 

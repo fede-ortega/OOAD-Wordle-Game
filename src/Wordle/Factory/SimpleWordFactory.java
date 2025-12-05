@@ -24,9 +24,9 @@ public class SimpleWordFactory implements WordFactory {
                 "TRAIN", "PLANE", "CHAIR", "TABLE", "WORLD"
         );
         List<String> sixLetterWords = Arrays.asList(
-                "BETTER", "SUMMER", "SEEMED", "HONEST", "FALLING",
-                "FADING", "SHARED", "LOSING", "INSIDE", "FRIEND",
-                "TRYING"
+                "BETTER", "SUMMER", "POCKET", "HONEST", "WINDOW",
+                "ORCHID", "FINGER", "SCREAM", "INSIDE", "FRIEND",
+                "ENOUGH", "DAMAGE", "ANYONE", "PRETTY", "LONELY"
         );
 
         return switch (wordLength) {

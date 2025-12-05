@@ -1,7 +1,6 @@
 package WordleTest.UITest;
 
 import Wordle.Event.EventBus;
-import Wordle.Event.GameEventListener;
 import Wordle.Model.GameRestartListener;
 import Wordle.Model.LetterState;
 import Wordle.Model.WordleGame;

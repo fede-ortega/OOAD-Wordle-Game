@@ -30,8 +30,6 @@ public class WordleFrame extends JFrame implements GameEventListener {
 
     private int currentRow = 0;
 
-    private final int TILE_SIZE = 50;
-
     public WordleFrame(WordleGame game, ColorStrategy colorStrategy) {
         this.game = game;
         this.colorStrategy = colorStrategy;
@@ -45,8 +43,9 @@ public class WordleFrame extends JFrame implements GameEventListener {
         setResizable(false);
 
         // Create components and layout.
-        JPanel mainPanel = new JPanel(new BorderLayout(10, 10));
-        mainPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+        int mainPanelPadding = 10;
+        JPanel mainPanel = new JPanel(new BorderLayout(mainPanelPadding, mainPanelPadding));
+        mainPanel.setBorder(BorderFactory.createEmptyBorder(mainPanelPadding, mainPanelPadding, mainPanelPadding, mainPanelPadding));
 
         JPanel gridPanel = createGridPanel(rows, cols);
         mainPanel.add(gridPanel, BorderLayout.CENTER);
@@ -80,6 +79,7 @@ public class WordleFrame extends JFrame implements GameEventListener {
     }
 
     private JPanel createGridPanel(int rows, int cols) {
+        float font = 24f;
         JPanel panel = new JPanel(new GridLayout(rows, cols, 5, 5));
         for (int r = 0; r < rows; r++) {
             for (int c = 0; c < cols; c++) {
@@ -87,9 +87,10 @@ public class WordleFrame extends JFrame implements GameEventListener {
                 cell.setHorizontalAlignment(JTextField.CENTER);
                 cell.setEditable(false);
                 cell.setFocusable(false);
-                cell.setFont(cell.getFont().deriveFont(Font.BOLD, 24f));
+                cell.setFont(cell.getFont().deriveFont(Font.BOLD, font));
 
-                Dimension dimension = new Dimension(TILE_SIZE, TILE_SIZE);
+                int tileSize = 50;
+                Dimension dimension = new Dimension(tileSize, tileSize);
                 cell.setPreferredSize(dimension);
                 cell.setMaximumSize(dimension);
                 cell.setMinimumSize(dimension);
@@ -138,6 +139,7 @@ public class WordleFrame extends JFrame implements GameEventListener {
         inputField.setEnabled(false);
 
         guessButton.setText("Play Again");
+        getRootPane().setDefaultButton(guessButton);
         for(ActionListener actionListener : inputField.getActionListeners()) {
             inputField.removeActionListener(actionListener);
         }
@@ -192,6 +194,7 @@ public class WordleFrame extends JFrame implements GameEventListener {
         guessButton.addActionListener(guessAction);
         inputField.addActionListener(guessAction);
         inputField.setEnabled(true);
+        inputField.grabFocus();
 
         messageLabel.setText("<html>Enter a " + cols + " letter word,<br>then press Guess.</html>");
     }
