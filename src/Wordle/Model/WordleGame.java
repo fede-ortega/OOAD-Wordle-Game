@@ -10,7 +10,7 @@ public class WordleGame {
     private static final int INITIAL_ATTEMPTS = 0;
     private static final int NO_OCCURRENCES = 0;
 
-    private String secretWord;
+    private final String secretWord;
     private final int maxAttempts;
     private int attempts;
     private boolean won;
@@ -40,10 +40,6 @@ public class WordleGame {
 
     public boolean isGameOver() {
         return won || attempts >= maxAttempts;
-    }
-
-    public String getSecretWord() {
-        return secretWord;
     }
 
     public LetterState[] guess(String guess) {
@@ -127,8 +123,7 @@ public class WordleGame {
         return states;
     }
 
-    public void reset(String secretWord) {
-        this.secretWord = secretWord.toUpperCase();
+    public void reset() {
         won = false;
         attempts = INITIAL_ATTEMPTS;
     }
