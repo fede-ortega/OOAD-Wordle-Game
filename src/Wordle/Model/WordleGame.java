@@ -7,6 +7,9 @@ import java.util.Map;
 
 public class WordleGame {
 
+    private static final int INITIAL_ATTEMPTS = 0;
+    private static final int NO_OCCURRENCES = 0;
+
     private String secretWord;
     private final int maxAttempts;
     private int attempts;
@@ -15,7 +18,7 @@ public class WordleGame {
     public WordleGame(String secretWord, int maxAttempts) {
         this.secretWord = secretWord.toUpperCase();
         this.maxAttempts = maxAttempts;
-        this.attempts = 0;
+        this.attempts = INITIAL_ATTEMPTS;
         this.won = false;
     }
 
@@ -95,7 +98,7 @@ public class WordleGame {
         Map<Character, Integer> counts = new HashMap<>();
         for (int i = 0; i < length; i++) {
             char character = secretWord.charAt(i);
-            counts.put(character, counts.getOrDefault(character, 0) + 1);
+            counts.put(character, counts.getOrDefault(character, NO_OCCURRENCES) + 1);
         }
 
         for (int i = 0; i < length; i++) {
@@ -113,7 +116,7 @@ public class WordleGame {
             }
             char guessCharacter = guess.charAt(i);
             Integer count = counts.get(guessCharacter);
-            if (count != null && count > 0) {
+            if (count != null && count > NO_OCCURRENCES) {
                 states[i] = LetterState.PRESENT;
                 counts.put(guessCharacter, count - 1);
             } else {
@@ -127,6 +130,6 @@ public class WordleGame {
     public void reset(String secretWord) {
         this.secretWord = secretWord.toUpperCase();
         won = false;
-        attempts = 0;
+        attempts = INITIAL_ATTEMPTS;
     }
 }
