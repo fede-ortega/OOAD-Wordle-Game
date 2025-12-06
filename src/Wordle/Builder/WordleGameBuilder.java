@@ -4,10 +4,6 @@ import Wordle.Factory.SimpleWordFactory;
 import Wordle.Factory.WordFactory;
 import Wordle.Model.WordleGame;
 
-/**
- * Wordle.Builder pattern: responsible for constructing a configured WordleGame.
- * It hides the details of which word list is used and how the secret word is chosen.
- */
 public class WordleGameBuilder {
 
     private int wordLength;

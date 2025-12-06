@@ -96,11 +96,9 @@ public class EventBusTest {
         String msg = "ROUND_ENDED";
         bus.publish(msg);
 
-        // listener1 was unregistered, should receive nothing
         assertTrue(listener1.getReceived().isEmpty(),
                 "Unregistered listener should not receive messages");
 
-        // listener2 still registered, should receive the message
         assertEquals(1, listener2.getReceived().size());
         assertEquals(msg, listener2.getReceived().getFirst());
     }

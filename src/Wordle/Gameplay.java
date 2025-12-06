@@ -10,10 +10,10 @@ import Wordle.UI.WordleFrame;
 
 import javax.swing.*;
 
-public class Main {
+public class Gameplay {
     public static void main(String[] args) {
         // Start Swing on the Wordle.Event Dispatch Thread
-        SwingUtilities.invokeLater(Main::playGame);
+        SwingUtilities.invokeLater(Gameplay::playGame);
     }
 
     private static void playGame() {

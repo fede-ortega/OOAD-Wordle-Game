@@ -9,9 +9,6 @@ import java.awt.Color;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-/**
- * Tests for the HalloweenColorStrategy (gray/orange/purple/black theme).
- */
 public class HalloweenColorStrategyTest {
 
     @Test

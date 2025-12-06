@@ -5,10 +5,6 @@ import Wordle.Event.EventBus;
 import java.util.HashMap;
 import java.util.Map;
 
-/**
- * Core game logic for Wordle.
- * It knows the secret word and evaluates guesses.
- */
 public class WordleGame {
 
     private String secretWord;
@@ -47,11 +43,6 @@ public class WordleGame {
         return secretWord;
     }
 
-    /**
-     * Applies a guess and returns the resulting state for each letter.
-     * This method also uses the EventBus (Observer pattern) to notify
-     * observers about messages such as errors or end of game.
-     */
     public LetterState[] guess(String guess) {
         if (isGameOver()) {
             EventBus.getInstance().publish("The game is already over.");
@@ -97,22 +88,16 @@ public class WordleGame {
         return result;
     }
 
-    /**
-     * Evaluates a guess and returns the LetterState for each character.
-     * This implementation correctly handles duplicate letters.
-     */
     private LetterState[] evaluateGuess(String guess) {
         int length = secretWord.length();
         LetterState[] states = new LetterState[length];
 
-        // Count how many times each letter appears in the secret word.
         Map<Character, Integer> counts = new HashMap<>();
         for (int i = 0; i < length; i++) {
             char character = secretWord.charAt(i);
             counts.put(character, counts.getOrDefault(character, 0) + 1);
         }
 
-        // First pass: mark CORRECT positions and update counts.
         for (int i = 0; i < length; i++) {
             char guessCharacter = guess.charAt(i);
             char secretCharacter = secretWord.charAt(i);
@@ -122,7 +107,6 @@ public class WordleGame {
             }
         }
 
-        // Second pass: mark PRESENT or ABSENT for the remaining letters.
         for (int i = 0; i < length; i++) {
             if (states[i] == LetterState.CORRECT) {
                 continue;

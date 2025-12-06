@@ -12,11 +12,6 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-/**
- * Swing user interface for the Wordle game.
- * This class also acts as an Observer by registering itself
- * in the EventBus and showing messages on the screen.
- */
 public class WordleFrame extends JFrame implements GameEventListener {
 
     private WordleGame game;
@@ -42,7 +37,6 @@ public class WordleFrame extends JFrame implements GameEventListener {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setResizable(false);
 
-        // Create components and layout.
         int mainPanelPadding = 10;
         JPanel mainPanel = new JPanel(new BorderLayout(mainPanelPadding, mainPanelPadding));
         mainPanel.setBorder(BorderFactory.createEmptyBorder(mainPanelPadding, mainPanelPadding, mainPanelPadding, mainPanelPadding));
@@ -64,17 +58,14 @@ public class WordleFrame extends JFrame implements GameEventListener {
 
         setContentPane(mainPanel);
         pack();
-        setLocationRelativeTo(null); // Center the window on screen.
+        setLocationRelativeTo(null);
 
-        // Register as observer in the Singleton EventBus.
         EventBus.getInstance().register(this);
 
-        // Add event handlers.
         GuessAction guessAction = new GuessAction();
         guessButton.addActionListener(guessAction);
-        inputField.addActionListener(guessAction); // Press Enter in the text field.
+        inputField.addActionListener(guessAction);
 
-        // Initialize grid appearance.
         resetGridColors();
     }
 
@@ -127,8 +118,6 @@ public class WordleFrame extends JFrame implements GameEventListener {
             }
 
         } catch (IllegalArgumentException ex) {
-            // The game already sent a human-readable message through the EventBus.
-            // We only log something to the console for debugging.
             System.out.println("Invalid guess: " + ex.getMessage());
         } catch (IllegalStateException ex) {
             System.out.println("Game state error: " + ex.getMessage());
@@ -205,8 +194,6 @@ public class WordleFrame extends JFrame implements GameEventListener {
 
     @Override
     public void onGameEvent(String message) {
-        // This method is called by the EventBus whenever someone publishes a message.
-        // We show the text in the label at the top of the window.
         messageLabel.setText(message);
     }
 

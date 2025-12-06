@@ -5,6 +5,8 @@ import Wordle.Model.LetterState;
 import java.awt.*;
 
 public class HalloweenColorStrategy extends ColorStrategy{
+
+    private static final Color HALLOWEEN_PURPLE = new Color(128, 0, 128);
     @Override
     public Color getColorForState(LetterState state) {
         if (state == null) {
@@ -14,7 +16,7 @@ public class HalloweenColorStrategy extends ColorStrategy{
         return switch (state){
             case ABSENT -> Color.GRAY;
             case PRESENT  -> Color.ORANGE;
-            case CORRECT -> new Color(128, 0, 128);
+            case CORRECT -> HALLOWEEN_PURPLE;
             default -> Color.BLACK;
         };
     }

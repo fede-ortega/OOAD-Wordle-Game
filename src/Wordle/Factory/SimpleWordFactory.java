@@ -4,12 +4,10 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
-/**
- * Simple concrete implementation of the WordListFactory.
- * In a real game, this could read from a file or database.
- */
 public class SimpleWordFactory implements WordFactory {
     static private final Random rand = new Random();
+    private static final int FOUR_LETTER = 4;
+    private static final int SIX_LETTER = 6;
 
     @Override
     public String chooseWord(int wordLength) {
@@ -30,8 +28,8 @@ public class SimpleWordFactory implements WordFactory {
         );
 
         return switch (wordLength) {
-            case 4 -> fourLetterWords.get(rand.nextInt(fourLetterWords.size()));
-            case 6 -> sixLetterWords.get(rand.nextInt(sixLetterWords.size()));
+            case FOUR_LETTER -> fourLetterWords.get(rand.nextInt(fourLetterWords.size()));
+            case SIX_LETTER -> sixLetterWords.get(rand.nextInt(sixLetterWords.size()));
             default -> fiveLetterWords.get(rand.nextInt(fiveLetterWords.size()));
         };
     }

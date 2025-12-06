@@ -209,6 +209,6 @@ Only TDD tests using JUnit. Coverage can be shown doing:
 
 ![Wordle_Tests.png](Wordle_Tests.png)
 
-4. Coverage is the following:
+Coverage is the following:
 
 ![Wordle_Coverage.png](Wordle_Coverage.png)
