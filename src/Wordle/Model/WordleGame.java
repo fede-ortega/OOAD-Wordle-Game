@@ -96,12 +96,12 @@ public class WordleGame {
         LetterState[] states = new LetterState[length];
 
         Map<Character, Integer> counts = new HashMap<>();
-        for (int i = 0; i < length; i++) {
+        for (int i = NO_OCCURRENCES; i < length; i++) {
             char character = secretWord.charAt(i);
             counts.put(character, counts.getOrDefault(character, NO_OCCURRENCES) + 1);
         }
 
-        for (int i = 0; i < length; i++) {
+        for (int i = NO_OCCURRENCES; i < length; i++) {
             char guessCharacter = guess.charAt(i);
             char secretCharacter = secretWord.charAt(i);
             if (guessCharacter == secretCharacter) {

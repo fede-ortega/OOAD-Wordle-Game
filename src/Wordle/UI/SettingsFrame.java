@@ -4,31 +4,39 @@ import javax.swing.*;
 import java.util.Objects;
 
 public class SettingsFrame extends JFrame {
+    private static final int STRUT_SIZE = 10;
+
+    private static final String[] LENGTH_OPTIONS = {"4", "5", "6"};
+    private static final String[] ATTEMPT_OPTIONS = {"2", "3", "4", "5", "6", "7", "8", "9"};
+    private static final String[] THEME_OPTIONS = {"Default", "Festive", "Halloween"};
+
+    private static final String DEFAULT_LENGTH = "5";
+    private static final String DEFAULT_ATTEMPTS = "5";
+    private static final String DEFAULT_THEME = "Default";
+
 
     private final int wordLength;
     private final int maxAttempts;
     private final String theme;
 
     public SettingsFrame() {
-        String[] lengths = {"4", "5", "6"};
-        String[] attempts = {"2", "3", "4", "5", "6", "7", "8", "9"};
-        String[] themes = {"Default", "Festive", "Halloween"};
+        JComboBox<String> lengthBox = new JComboBox<>(LENGTH_OPTIONS);
+        lengthBox.setSelectedItem(DEFAULT_LENGTH);
 
-        JComboBox<String> lengthBox = new JComboBox<>(lengths);
-        lengthBox.setSelectedItem("5");
-        JComboBox<String> attemptBox = new JComboBox<>(attempts);
-        attemptBox.setSelectedItem("5");
-        JComboBox<String> themeBox = new JComboBox<>(themes);
-        themeBox.setSelectedItem("Default");
+        JComboBox<String> attemptBox = new JComboBox<>(ATTEMPT_OPTIONS);
+        attemptBox.setSelectedItem(DEFAULT_ATTEMPTS);
+
+        JComboBox<String> themeBox = new JComboBox<>(THEME_OPTIONS);
+        themeBox.setSelectedItem(DEFAULT_THEME);
 
         JPanel panel = new JPanel();
         panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
         panel.add(new JLabel("Length:"));
         panel.add(lengthBox);
-        panel.add(Box.createVerticalStrut(10));
+        panel.add(Box.createVerticalStrut(STRUT_SIZE));
         panel.add(new JLabel("Attempts:"));
         panel.add(attemptBox);
-        panel.add(Box.createVerticalStrut(10));
+        panel.add(Box.createVerticalStrut(STRUT_SIZE));
         panel.add(new JLabel("Theme:"));
         panel.add(themeBox);
 

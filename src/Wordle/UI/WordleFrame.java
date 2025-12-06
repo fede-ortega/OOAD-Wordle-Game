@@ -14,6 +14,12 @@ import java.awt.event.ActionListener;
 
 public class WordleFrame extends JFrame implements GameEventListener {
 
+    private static final int PANEL_PADDING = 10;
+    private static final int BORDER_LAYOUT = 5;
+    private static final int TITLE_SIZE = 50;
+    private static final int NO_ROWS = 0;
+    private static final float FONT_SIZE = 24f;
+
     private WordleGame game;
     private final ColorStrategy colorStrategy;
 
@@ -23,7 +29,7 @@ public class WordleFrame extends JFrame implements GameEventListener {
     private final JLabel messageLabel;
     private GameRestartListener listener;
 
-    private int currentRow = 0;
+    private int currentRow = NO_ROWS;
 
     public WordleFrame(WordleGame game, ColorStrategy colorStrategy) {
         this.game = game;
@@ -37,14 +43,14 @@ public class WordleFrame extends JFrame implements GameEventListener {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setResizable(false);
 
-        int mainPanelPadding = 10;
+        int mainPanelPadding = PANEL_PADDING;
         JPanel mainPanel = new JPanel(new BorderLayout(mainPanelPadding, mainPanelPadding));
         mainPanel.setBorder(BorderFactory.createEmptyBorder(mainPanelPadding, mainPanelPadding, mainPanelPadding, mainPanelPadding));
 
         JPanel gridPanel = createGridPanel(rows, cols);
         mainPanel.add(gridPanel, BorderLayout.CENTER);
 
-        JPanel inputPanel = new JPanel(new BorderLayout(5, 5));
+        JPanel inputPanel = new JPanel(new BorderLayout(BORDER_LAYOUT, BORDER_LAYOUT));
         inputField = new JTextField();
         guessButton = new JButton("Guess");
 
@@ -70,23 +76,22 @@ public class WordleFrame extends JFrame implements GameEventListener {
     }
 
     private JPanel createGridPanel(int rows, int cols) {
-        float font = 24f;
-        JPanel panel = new JPanel(new GridLayout(rows, cols, 5, 5));
-        for (int r = 0; r < rows; r++) {
-            for (int c = 0; c < cols; c++) {
+        JPanel panel = new JPanel(new GridLayout(rows, cols, BORDER_LAYOUT, BORDER_LAYOUT));
+        for (int row = NO_ROWS; row < rows; row++) {
+            for (int col = NO_ROWS; col < cols; col++) {
                 JTextField cell = new JTextField();
                 cell.setHorizontalAlignment(JTextField.CENTER);
                 cell.setEditable(false);
                 cell.setFocusable(false);
-                cell.setFont(cell.getFont().deriveFont(Font.BOLD, font));
+                cell.setFont(cell.getFont().deriveFont(Font.BOLD, FONT_SIZE));
 
-                int tileSize = 50;
+                int tileSize = TITLE_SIZE;
                 Dimension dimension = new Dimension(tileSize, tileSize);
                 cell.setPreferredSize(dimension);
                 cell.setMaximumSize(dimension);
                 cell.setMinimumSize(dimension);
 
-                gridFields[r][c] = cell;
+                gridFields[row][col] = cell;
                 panel.add(cell);
             }
         }
@@ -117,10 +122,10 @@ public class WordleFrame extends JFrame implements GameEventListener {
                 gameOverHandler();
             }
 
-        } catch (IllegalArgumentException ex) {
-            System.out.println("Invalid guess: " + ex.getMessage());
-        } catch (IllegalStateException ex) {
-            System.out.println("Game state error: " + ex.getMessage());
+        } catch (IllegalArgumentException exception) {
+            System.out.println("Invalid guess: " + exception.getMessage());
+        } catch (IllegalStateException exception) {
+            System.out.println("Game state error: " + exception.getMessage());
         }
     }
 
@@ -144,16 +149,16 @@ public class WordleFrame extends JFrame implements GameEventListener {
 
     private void updateGridRow(String guess, LetterState[] states) {
         int cols = game.getWordLength();
-        for (int c = 0; c < cols; c++) {
-            if (c < guess.length()) {
-                char ch = guess.charAt(c);
-                gridFields[currentRow][c].setText(String.valueOf(ch));
-                gridFields[currentRow][c].setBackground(
-                        colorStrategy.getColorForState(states[c])
+        for (int col = NO_ROWS; col < cols; col++) {
+            if (col < guess.length()) {
+                char ch = guess.charAt(col);
+                gridFields[currentRow][col].setText(String.valueOf(ch));
+                gridFields[currentRow][col].setBackground(
+                        colorStrategy.getColorForState(states[col])
                 );
             } else {
-                gridFields[currentRow][c].setText("");
-                gridFields[currentRow][c].setBackground(
+                gridFields[currentRow][col].setText("");
+                gridFields[currentRow][col].setBackground(
                         colorStrategy.getColorForState(LetterState.UNKNOWN)
                 );
             }
@@ -165,7 +170,7 @@ public class WordleFrame extends JFrame implements GameEventListener {
         this.game = game;
         int cols = game.getWordLength();
         game.reset(game.getSecretWord());
-        currentRow = 0;
+        currentRow = NO_ROWS;
 
         for (JTextField[] row : gridFields) {
             for (JTextField cell : row) {
@@ -199,7 +204,7 @@ public class WordleFrame extends JFrame implements GameEventListener {
 
     private class GuessAction implements ActionListener {
         @Override
-        public void actionPerformed(ActionEvent e) {
+        public void actionPerformed(ActionEvent event) {
             submitGuess();
         }
     }

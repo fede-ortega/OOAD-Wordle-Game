@@ -30,8 +30,6 @@ public class Gameplay {
         WordleFrame frame = new WordleFrame(game, colorStrategy);
         frame.setVisible(true);
 
-
-
         frame.setGameRestart(() -> {
 
             WordleGameBuilder newBuilder = new WordleGameBuilder()
