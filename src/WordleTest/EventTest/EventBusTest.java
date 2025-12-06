@@ -29,11 +29,11 @@ public class EventBusTest {
     @BeforeEach
     void resetEventBusListeners() throws Exception {
         EventBus bus = EventBus.getInstance();
-        Field f = EventBus.class.getDeclaredField("listeners");
-        f.setAccessible(true);
+        Field field = EventBus.class.getDeclaredField("listeners");
+        field.setAccessible(true);
         @SuppressWarnings("unchecked")
         List<GameEventListener> listeners =
-                (List<GameEventListener>) f.get(bus);
+                (List<GameEventListener>) field.get(bus);
         listeners.clear();
     }
 
@@ -64,15 +64,14 @@ public class EventBusTest {
     }
 
     @Test
-    void registerLullListenerDoesNothing() throws Exception {
+    void registerNullListenerDoesNothing() throws Exception {
         EventBus bus = EventBus.getInstance();
 
-        // capture size before
-        Field f = EventBus.class.getDeclaredField("listeners");
-        f.setAccessible(true);
+        Field field = EventBus.class.getDeclaredField("listeners");
+        field.setAccessible(true);
         @SuppressWarnings("unchecked")
         List<GameEventListener> listeners =
-                (List<GameEventListener>) f.get(bus);
+                (List<GameEventListener>) field.get(bus);
         int sizeBefore = listeners.size();
 
         bus.register(null);

@@ -106,7 +106,7 @@ public class WordleGame {
             }
         }
 
-        for (int i = 0; i < length; i++) {
+        for (int i = NO_OCCURRENCES; i < length; i++) {
             if (states[i] == LetterState.CORRECT) {
                 continue;
             }

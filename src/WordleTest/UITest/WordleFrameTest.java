@@ -29,33 +29,33 @@ public class WordleFrameTest {
 
 
     private JTextField[][] getGridFields(WordleFrame frame) throws Exception {
-        Field f = WordleFrame.class.getDeclaredField("gridFields");
-        f.setAccessible(true);
-        return (JTextField[][]) f.get(frame);
+        Field field = WordleFrame.class.getDeclaredField("gridFields");
+        field.setAccessible(true);
+        return (JTextField[][]) field.get(frame);
     }
 
     private JTextField getInputField(WordleFrame frame) throws Exception {
-        Field f = WordleFrame.class.getDeclaredField("inputField");
-        f.setAccessible(true);
-        return (JTextField) f.get(frame);
+        Field field = WordleFrame.class.getDeclaredField("inputField");
+        field.setAccessible(true);
+        return (JTextField) field.get(frame);
     }
 
     private JButton getGuessButton(WordleFrame frame) throws Exception {
-        Field f = WordleFrame.class.getDeclaredField("guessButton");
-        f.setAccessible(true);
-        return (JButton) f.get(frame);
+        Field field = WordleFrame.class.getDeclaredField("guessButton");
+        field.setAccessible(true);
+        return (JButton) field.get(frame);
     }
 
     private JLabel getMessageLabel(WordleFrame frame) throws Exception {
-        Field f = WordleFrame.class.getDeclaredField("messageLabel");
-        f.setAccessible(true);
-        return (JLabel) f.get(frame);
+        Field field = WordleFrame.class.getDeclaredField("messageLabel");
+        field.setAccessible(true);
+        return (JLabel) field.get(frame);
     }
 
     private int getCurrentRow(WordleFrame frame) throws Exception {
-        Field f = WordleFrame.class.getDeclaredField("currentRow");
-        f.setAccessible(true);
-        return (int) f.get(frame);
+        Field field = WordleFrame.class.getDeclaredField("currentRow");
+        field.setAccessible(true);
+        return (int) field.get(frame);
     }
 
     @Test
