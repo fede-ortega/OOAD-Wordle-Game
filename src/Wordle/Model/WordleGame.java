@@ -42,10 +42,6 @@ public class WordleGame {
         return won || attempts >= maxAttempts;
     }
 
-    public String getSecretWord() {
-        return secretWord;
-    }
-
     public LetterState[] guess(String guess) {
         if (isGameOver()) {
             EventBus.getInstance().publish("The game is already over.");
@@ -127,8 +123,7 @@ public class WordleGame {
         return states;
     }
 
-    public void reset(String secretWord) {
-        this.secretWord = secretWord.toUpperCase();
+    public void reset() {
         won = false;
         attempts = INITIAL_ATTEMPTS;
     }

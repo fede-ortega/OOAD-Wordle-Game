@@ -48,8 +48,6 @@ public class WordleGameBuilderTest {
         assertEquals(wordLength, factory.getLastRequestedLength(),
                 "Builder should call chooseWord with the configured word length");
 
-        assertEquals(secretWord, game.getSecretWord(),
-                "Game should use the secret word returned by the factory");
         assertEquals(maxAttempts, game.getMaxAttempts(),
                 "Game should use the configured max attempts");
     }
@@ -108,10 +106,8 @@ public class WordleGameBuilderTest {
         WordleGame game1 = builder1.build();
         WordleGame game2 = builder2.build();
 
-        assertEquals("APPLE", game1.getSecretWord());
         assertEquals(6, game1.getMaxAttempts());
 
-        assertEquals("BRAIN", game2.getSecretWord());
         assertEquals(8, game2.getMaxAttempts());
     }
 }

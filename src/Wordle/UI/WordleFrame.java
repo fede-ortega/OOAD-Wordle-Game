@@ -164,7 +164,7 @@ public class WordleFrame extends JFrame implements GameEventListener {
     public void resetGame(WordleGame game, ColorStrategy colorStrategy) {
         this.game = game;
         int cols = game.getWordLength();
-        game.reset(game.getSecretWord());
+        game.reset();
         currentRow = 0;
 
         for (JTextField[] row : gridFields) {
